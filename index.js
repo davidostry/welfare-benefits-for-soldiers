@@ -18,7 +18,7 @@ app.use("/soldiers", walfareRecordRouter)
 
 app.use("/budget", budgetAlocatioRouter)
 
-app.use("budget/:id", spendTransactionRouter)
+app.use("/budget/", spendTransactionRouter)
 
 app.use(errorHandeling)
 
