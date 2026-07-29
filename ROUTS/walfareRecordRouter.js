@@ -1,8 +1,10 @@
 import express from 'express'
-import { createRecord } from '../CTRLS/walfareRecordCtrl.js'
+import { createRecord, getRecord } from '../CTRLS/walfareRecordCtrl.js'
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/", createRecord)
+router.post("/:soldierId/benefits", createRecord);
 
-export default router
+router.get("/:soldierId/benefits", getRecord);
+
+export default router;

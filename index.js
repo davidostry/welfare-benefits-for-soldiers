@@ -13,7 +13,8 @@ app.use(express.json())
 
 app.use(logger)
 
-app.use("/soldiers/:soldierId/benefits", walfareRecordRouter)
+app.use("/soldiers", walfareRecordRouter)
+
 
 app.use("/budget", budgetAlocatioRouter)
 

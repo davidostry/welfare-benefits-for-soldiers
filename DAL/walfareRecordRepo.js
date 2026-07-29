@@ -5,11 +5,17 @@ const collection = db.collection("walfer");
 
 export async function createRecord(record){
     const insertad = await collection.insertOne(record)
-    console.log(insertad);
-    const id = insertad.insertadId
-    
+
+    const id = insertad.insertedId
     
     const result = await collection.findOne({_id: new ObjectId(id)})
 
-    return insertad
+    return result
+}
+
+export async function getRecordById(id){
+    
+    const result = await collection.findOne({_id: new ObjectId(id)});
+
+    return result;
 }
