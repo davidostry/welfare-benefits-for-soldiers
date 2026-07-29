@@ -19,3 +19,8 @@ export async function getRecordById(id){
 
     return result;
 }
+
+export async function updateRecord(id, update){
+    const result = await collection.findOneAndUpdate({_id: new ObjectId(id)}, {$set:update}, {returnDocument: 'after'});
+    return result
+}
