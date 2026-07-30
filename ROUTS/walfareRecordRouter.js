@@ -8,6 +8,6 @@ router.post("/:soldierId/benefits", validateBody, createRecord);
 
 router.get("/:soldierId/benefits", getRecord);
 
-router.patch("/:soldierId/benefits", updateRecord)
+router.patch("/:soldierId/benefits",validateBody , updateRecord)
 
 export default router;

@@ -1,6 +1,6 @@
 export async function validateBody(req, res, next) {
     const { unit, benefitType, details, decisionReason, budgetApprove, startDate } = req.body
-    if (!unit || typeof unit != "string") return res.status(400).json({ message: "valid unit is missing" });
+    if (req.method === "post" && !unit || req.method === "post" && typeof unit != "string") return res.status(400).json({ message: "valid unit is missing" });
     if (!benefitType || typeof benefitType != "string") return res.status(400).json({ message: "valid benefitType is missing" });
     if (!decisionReason || typeof decisionReason != "string") return res.status(400).json({ message: "valid desicionReason is missing" });
     if (!budgetApprove || budgetApprove != true) return res.status(400).json({ message: "valid budgetApprove is missing" });
