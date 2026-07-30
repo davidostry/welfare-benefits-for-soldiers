@@ -1,24 +1,25 @@
-import { createRecord, getRecordById, updateRecord } from '../DAL/walfareRecordRepo.js'
+import { createRecord, getRecordBySoldierId, updateRecord } from '../DAL/walfareRecordRepo.js'
 
-export async function addRecord(id, record) {
-    // const soldier = await getRecordById(id)
-    // if (soldier) {
-    //     const error = new Error("record is already exists");
-    //     error.status(209)
-    //     return error
-    // }
+export async function addRecord(soldierId, record) {
+    const soldier = await getRecordBySoldierId(soldierId)
+    if (soldier) {
+        const error = new Error("record is already exists");
+        error.statusCode = 209
+        throw error
+    }
+    const { unit, benefitTAype, startDate, decisionReason, budgetApprove, details } = record
     const newRecord = {
-        soldierId: id,
-        unit: record.unit,
-        currentBenefitTAype: record.benefitTAype,
+        soldierId,
+        unit,
+        currentBenefitTAype: benefitTAype,
         history: [
             {
-                startDate: record.startDate || new Date,
+                startDate: startDate || new Date,
                 endDate: null,
-                decisionReason: record.decisionReason,
-                budgetApprove: record.budgetApprove,
-                benefitTAype: record.benefitTAype,
-                details: record.details
+                decisionReason,
+                budgetApprove,
+                benefitTAype,
+                details
             }
         ]
     }
@@ -26,9 +27,9 @@ export async function addRecord(id, record) {
     return await createRecord(newRecord)
 }
 
-export async function showRecord(id) {
+export async function showRecord(soldierId) {
 
-    return await getRecordById(id)
+    return await getRecordBySoldierId(soldierId)
 }
 
 export async function editRecord(id, record) {

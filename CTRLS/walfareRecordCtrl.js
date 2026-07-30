@@ -3,9 +3,9 @@ import { addRecord, showRecord, editRecord } from '../SERVICE/walfareRecordServi
 export async function createRecord(req, res, next) {
     try {
         const { soldierId } = req.params
-        const record = req.body
+        const { unit, benefitType, details, decisionReason, budgetApprove, startDate } = req.body
+        const record = { unit, benefitType, details, decisionReason, budgetApprove, startDate }
         const result = await addRecord(soldierId, record)
-        if (!result) return res.status(409).json({ message: "record is alredy exists" })
         return res.status(201).json({ data: result })
     } catch (e) {
         next(e)

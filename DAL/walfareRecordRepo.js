@@ -3,8 +3,8 @@ import {ObjectId} from 'mongodb'
 
 const collection = db.collection("walfer");
 
-export async function createRecord(record){
-    const insertad = await collection.insertOne(record)
+export async function createRecord(newRecord){
+    const insertad = await collection.insertOne(newRecord)
 
     const id = insertad.insertedId
     
@@ -13,9 +13,9 @@ export async function createRecord(record){
     return result
 }
 
-export async function getRecordById(id){
+export async function getRecordBySoldierId(soldierId){
     
-    const result = await collection.findOne({_id: new ObjectId(id)});
+    const result = await collection.findOne({soldierId: soldierId});
 
     return result;
 }
