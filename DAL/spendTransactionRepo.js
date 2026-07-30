@@ -2,9 +2,9 @@ import {supabase} from '../DB/budgetAlocationDB.js'
 
 const TABLE = "transactions"
 
-export async function getAllTransactions(id){
+export async function getAllTransactions(budgetId){
     
-    const result = await supabase.from(TABLE).select().eq("budgetId", id)
+    const result = await supabase.from(TABLE).select().eq("budgetId", budgetId)
     return result
 }
 
