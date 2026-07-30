@@ -7,22 +7,23 @@ export async function addRecord(soldierId, record) {
         error.statusCode = 209
         throw error
     }
-    const { unit, benefitTAype, startDate, decisionReason, budgetApprove, details } = record
+    const { unit, benefitType, startDate, decisionReason, budgetApprove, details } = record
     const newRecord = {
         soldierId,
         unit,
-        currentBenefitTAype: benefitTAype,
+        currentBenefitType: benefitType,
         history: [
             {
                 startDate: startDate || new Date,
                 endDate: null,
                 decisionReason,
                 budgetApprove,
-                benefitTAype,
+                benefitType,
                 details
             }
         ]
     }
+
 
     return await createRecord(newRecord)
 }
@@ -32,6 +33,31 @@ export async function showRecord(soldierId) {
     return await getRecordBySoldierId(soldierId)
 }
 
-export async function editRecord(id, record) {
-    return await updateRecord(id, record)
+export async function editRecord(soldierId, update) {
+    const soldier = await getRecordBySoldierId(soldierId)
+    if (!soldier) {
+        const error = new Error("soldier not found")
+        error.statusCode = 404
+        throw error
+    }
+    const { benefitType, details, decisionReason, budgetApprove, decisionDate } = update
+    console.log(decisionDate);
+
+    soldier.history.endDate = decisionDate
+    soldier.currentBenefitType = benefitType
+
+    const newBenefit = {
+        startDate: decisionDate,
+        endDate: null,
+        decisionReason,
+        details,
+        benefitType,
+        budgetApprove
+
+    }
+
+    soldier.history.push(newBenefit)
+
+
+    return await updateRecord(soldierId, update)
 }

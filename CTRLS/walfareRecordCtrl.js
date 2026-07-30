@@ -16,7 +16,6 @@ export async function getRecord(req, res, next) {
 
     try {
         const { soldierId } = req.params
-
         const result = await showRecord(soldierId);
         if (!result) return res.status(404).json({ message: "record not found" });
         return res.json({ data: result })

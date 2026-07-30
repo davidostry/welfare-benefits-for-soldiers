@@ -15,7 +15,6 @@ app.use(logger)
 
 app.use("/soldiers", walfareRecordRouter)
 
-
 app.use("/budget", budgetAlocatioRouter)
 
 app.use("/budget/", spendTransactionRouter)

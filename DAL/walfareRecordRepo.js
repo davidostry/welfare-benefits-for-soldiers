@@ -21,7 +21,7 @@ export async function getRecordBySoldierId(soldierId){
 }
 
 
-export async function updateRecord(id, update){
-    const result = await collection.findOneAndUpdate({_id: new ObjectId(id)}, {$set:update}, {returnDocument: 'after'});
+export async function updateRecord(soldierId, update){
+    const result = await collection.findOneAndUpdate({soldierId: soldierId}, {$set:update}, {returnDocument: 'after'});
     return result
 }
