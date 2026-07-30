@@ -14,7 +14,7 @@ export async function getBudgets() {
 
 export async function getByFilter(column, value) {
     console.log(column, value);
-    
+
     const result = await supabase.from(TABLE).select().eq(column, value)
     return result
 }
